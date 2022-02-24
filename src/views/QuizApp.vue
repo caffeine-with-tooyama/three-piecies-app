@@ -2,28 +2,67 @@
   <h1>Vue クイズ</h1>
   <div class="app">
     <h2>Q. {{ "クイズタイトル" }}</h2>
-    <img
-      class="quiz-image"
-      src="https://via.placeholder.com/300x300"
-      alt="クイズタイトル"
-    />
+    <img class="quiz-image" src="@/assets/logo.png" alt="クイズタイトル" />
     <div class="container">
-      <button>
+      <button v-on:click="choice1">
         {{ "選択肢1" }}
       </button>
-      <button>
+      <button v-on:click="choice2">
         {{ "選択肢2" }}
       </button>
-      <button>
+      <button v-on:click="choice3">
         {{ "選択肢3" }}
       </button>
     </div>
-    <div>{{ "答え" }}</div>
+    <div>{{ "feedback" }}</div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      feedback: "",
+      quiz: {
+        text: "この星の名前は何でしょう？",
+        image: "Ganymede.jpg",
+        choices: [
+          {
+            text: "ゴリアテ",
+            isCorrect: false,
+            feedback:
+              "残念！ゴリアテは、旧約聖書に登場するダビデに石で殺される巨人だよ。",
+          },
+          {
+            text: "ゼニガメ",
+            isCorrect: false,
+            feedback:
+              "残念！ゼニガメは、クサガメまたはニホンイシガメの幼体だよ。",
+          },
+          {
+            text: "ガニメデ",
+            isCorrect: true,
+            feedback: "正解！ガニメデは、木星の第三惑星だよ！",
+          },
+        ],
+      },
+    }
+  },
+  methods: {
+    choiced(choice) {
+      this.feedback = choice.feedback
+
+      if (choice.isCorrect) {
+        // 次の問題へ
+      }
+    },
+  },
+  computed: {
+    currentQuiz: function () {
+      return this.quiz[this.number]
+    },
+  },
+}
 </script>
 
 <style>
