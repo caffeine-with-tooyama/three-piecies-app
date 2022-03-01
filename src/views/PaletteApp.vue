@@ -11,7 +11,8 @@
     <div class="colors-container">
       <div
         class="mini-palette"
-        v-for="color in colors"
+        v-for="(color, index) in colors"
+        v-bind:key="index"
         v-bind:style="{
           backgroundColor: `rgba(${color.red}, ${color.green}, 200, 0.5)`,
         }"
@@ -23,35 +24,38 @@
 
 <script>
 export default {
+  name: "app",
   data() {
     return {
       red: 0,
       green: 0,
-      colors: [{ red: 0, green: 0 }],
+      colors: [],
     }
   },
-  changeColor(e) {
-    this.red = e.offsetX
-    this.green = e.offsetY
-  },
-  // 色を選んでミニパレットに追加する
-  pickColor() {
-    const newColor = {
-      red: this.red,
-      green: this.green,
-    }
-    this.colors.push(newColor)
-  },
-  // パレットに指定した色を表示する
-  showColor(color) {
-    this.red = color.red
-    this.green = color.green
-  },
-  computed: {
-    paletteStyle() {
-      return {
-        backgroundColor: `rgba(${this.red}, ${this.green}, 200, 0.5)`,
+  methods: {
+    changeColor(e) {
+      this.red = e.offsetX
+      this.green = e.offsetY
+    },
+    // 色を選んでミニパレットに追加する
+    pickColor() {
+      const newColor = {
+        red: this.red,
+        green: this.green,
       }
+      this.colors.push(newColor)
+    },
+    // パレットに指定した色を表示する
+    showColor(color) {
+      this.red = color.red
+      this.green = color.green
+    },
+    computed: {
+      paletteStyle() {
+        return {
+          backgroundColor: `rgba(${this.red}, ${this.green}, 200, 0.5)`,
+        }
+      },
     },
   },
 }
