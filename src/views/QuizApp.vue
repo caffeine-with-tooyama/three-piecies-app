@@ -1,20 +1,19 @@
 <template>
   <h1>Vue クイズ</h1>
   <div class="app">
-    <h2>Q. {{ "クイズタイトル" }}</h2>
-    <img class="quiz-image" src="@/assets/logo.png" alt="クイズタイトル" />
+    <h2>Q. この国旗の国名はなんでしょう?</h2>
+    <img class="quiz-image" src="@/assets/Armenia.png" alt="国旗" />
     <div class="container">
-      <button v-on:click="choice1">
-        {{ "選択肢1" }}
-      </button>
-      <button v-on:click="choice2">
-        {{ "選択肢2" }}
-      </button>
-      <button v-on:click="choice3">
-        {{ "選択肢3" }}
+      <button
+        type="button"
+        v-for="choice in quiz.choices"
+        v-bind:key="choice"
+        v-on:click="choiced(choice)"
+      >
+        {{ choice.text }}
       </button>
     </div>
-    <div>{{ "feedback" }}</div>
+    <div>{{ feedback }}</div>
   </div>
 </template>
 
@@ -24,25 +23,23 @@ export default {
     return {
       feedback: "",
       quiz: {
-        text: "この星の名前は何でしょう？",
-        image: "Ganymede.jpg",
+        text: "この国旗の国名はなんでしょう?",
+        image: "Armenia.jpg",
         choices: [
           {
-            text: "ゴリアテ",
+            text: "シリア",
             isCorrect: false,
-            feedback:
-              "残念！ゴリアテは、旧約聖書に登場するダビデに石で殺される巨人だよ。",
+            feedback: "残念！",
           },
           {
-            text: "ゼニガメ",
+            text: "パキスタン",
             isCorrect: false,
-            feedback:
-              "残念！ゼニガメは、クサガメまたはニホンイシガメの幼体だよ。",
+            feedback: "残念！",
           },
           {
-            text: "ガニメデ",
+            text: "アルメニア",
             isCorrect: true,
-            feedback: "正解！ガニメデは、木星の第三惑星だよ！",
+            feedback: "正解！",
           },
         ],
       },
@@ -57,11 +54,7 @@ export default {
       }
     },
   },
-  computed: {
-    currentQuiz: function () {
-      return this.quiz[this.number]
-    },
-  },
+  computed: {},
 }
 </script>
 
