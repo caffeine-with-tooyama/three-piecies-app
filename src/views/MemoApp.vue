@@ -21,7 +21,7 @@
           <input type="checkbox" />
         </div>
         <div class="memo__text">ピーマンを2個買う</div>
-        <button class="memo__delete">削除</button>
+        <button class="memo__delete">削</button>
       </li>
     </ul>
     <div class="add-memo-field">
